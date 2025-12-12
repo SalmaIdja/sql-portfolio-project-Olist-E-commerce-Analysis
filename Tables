@@ -1,0 +1,8 @@
+--Data Tables
+
+customers → customer_id, customer_city, customer_state
+orders → order_id, cstomer_id, order_status, order_purchase_timestamp
+order_items → order_id, product_id, seller_id, price, freight_value
+products → product_id, product_category_name, product_name_length
+payments → order_id, payment_type, payment_value
+sellers → seller_id, seller_city, seller_state
