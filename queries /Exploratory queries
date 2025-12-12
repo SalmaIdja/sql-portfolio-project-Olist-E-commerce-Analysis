@@ -1,0 +1,29 @@
+--Revenue by Product Category
+
+SELECT p.product_category_name, SUM(oi.price) AS revenue
+FROM order_items oi
+JOIN products p ON oi.product_id = p.product_id
+GROUP BY p.product_category_name
+ORDER BY revenue DESC;
+
+
+
+--Top 5 Customer States by Orders
+
+SELECT c.customer_state, COUNT(o.order_id) AS num_orders
+FROM customers c
+JOIN orders o ON c.customer_id = o.customer_id
+GROUP BY c.customer_state
+ORDER BY num_orders DESC
+LIMIT 5;
+
+
+
+-Monthly Sales Trend
+
+SELECT DATE_TRUNC('month', o.order_purchase_timestamp) AS month,
+       SUM(oi.price) AS monthly_sales
+FROM orders o
+JOIN order_items oi ON o.order_id = oi.order_id
+GROUP BY month
+ORDER BY month;
