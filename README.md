@@ -4,6 +4,7 @@
 This project uses the **Brazilian E‑Commerce Public Dataset by Olist** (available on Kaggle) to demonstrate SQL data cleaning, analysis, and business insights.  
 The dataset contains multiple tables: customers, orders, order_items, products, payments, and sellers.
 
+
 ### Goals
 - Clean messy data (missing values, duplicates, inconsistent categories).
 - Validate business rules (payments vs orders, shipments vs order dates).
@@ -17,7 +18,18 @@ The dataset contains multiple tables: customers, orders, order_items, products, 
 - **order_items** → order_id, product_id, seller_id, price, freight_value  
 - **products** → product_id, product_category_name, product_name_length  
 - **payments** → order_id, payment_type, payment_value  
-- **sellers** → seller_id, seller_city, seller_state  
+- **sellers** → seller_id, seller_city, seller_state
+
+-  📂 Dataset
+
+This project uses the **Brazilian E‑Commerce Public Dataset by Olist**, available on Kaggle:
+
+[Brazilian E‑Commerce Public Dataset by Olist](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce)
+
+To reproduce this project:
+1. Download the dataset from Kaggle using the link above.
+2. Load the CSV files into your SQL database (Postgres, MySQL, or SQLite).
+3. Run the cleaning and analysis queries provided in this repository.
 
 ---
  Data Cleaning
