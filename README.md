@@ -34,7 +34,7 @@ To reproduce this project:
 ---
  Data Cleaning
 
-### Standardize Product Categories
+### Cleaning and Exploring Olist-E-commerce tables 
 ```sql
 UPDATE products
 SET product_category_name = INITCAP(COALESCE(product_category_name, 'Uncategorized'));
