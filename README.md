@@ -171,3 +171,59 @@ SELECT o.order_id, o.order_purchase_timestamp, s.ship_date
 FROM orders o
 JOIN shipments s ON o.order_id = s.order_id
 WHERE s.ship_date < o.order_purchase_timestamp;
+
+
+## SQL Analysis ,exploring Script for Olist E-Commerce Dataset
+
+
+-- 1. Revenue by Product Category
+SELECT p.product_category_name, SUM(oi.price) AS revenue
+FROM order_items oi
+JOIN products p ON oi.product_id = p.product_id
+GROUP BY p.product_category_name
+ORDER BY revenue DESC;
+
+-- 2. Top 5 Customer States by Orders
+SELECT c.customer_state, COUNT(o.order_id) AS num_orders
+FROM customers c
+JOIN orders o ON c.customer_id = o.customer_id
+GROUP BY c.customer_state
+ORDER BY num_orders DESC
+LIMIT 5;
+
+-- 3. Monthly Sales Trend
+SELECT DATE_TRUNC('month', o.order_purchase_timestamp) AS month,
+       SUM(oi.price) AS monthly_sales
+FROM orders o
+JOIN order_items oi ON o.order_id = oi.order_id
+GROUP BY month
+ORDER BY month;
+
+-- 4. Top 10 Sellers by Revenue
+SELECT s.seller_id, s.seller_city, s.seller_state, SUM(oi.price) AS revenue
+FROM order_items oi
+JOIN sellers s ON oi.seller_id = s.seller_id
+GROUP BY s.seller_id, s.seller_city, s.seller_state
+ORDER BY revenue DESC
+LIMIT 10;
+
+-- 5. Payment Method Distribution
+SELECT payment_type, COUNT(*) AS num_payments, SUM(payment_value) AS total_value
+FROM payments
+GROUP BY payment_type
+ORDER BY total_value DESC;
+
+-- 6. Customer Retention (Repeat Buyers)
+SELECT customer_id, COUNT(DISTINCT order_id) AS num_orders
+FROM orders
+GROUP BY customer_id
+HAVING COUNT(DISTINCT order_id) > 1
+ORDER BY num_orders DESC;
+
+-- 7. Average Freight Cost by State
+SELECT c.customer_state, AVG(oi.freight_value) AS avg_freight
+FROM orders o
+JOIN customers c ON o.customer_id = c.customer_id
+JOIN order_items oi ON o.order_id = oi.order_id
+GROUP BY c.customer_state
+ORDER BY avg_freight DESC;
